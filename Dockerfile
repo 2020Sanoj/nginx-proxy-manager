@@ -24,11 +24,11 @@ RUN apk upgrade --no-cache -a && \
     apk add --no-cache ca-certificates nodejs yarn file && \
     yarn global add clean-modules && \
     if [ "$TARGETARCH" = "amd64" ]; then \
-     npm_config_arch=x64 npm_config_target_arch=x64 yarn install; \
+     npm_config_target_arch=x64 yarn install; \
     elif [ "$TARGETARCH" = "arm64" ]; then \
-      npm_config_arch=arm64 npm_config_target_arch=arm64 yarn install; \
+      npm_config_target_arch=arm64 yarn install; \
     elif [ "$TARGETARCH" = "arm" ]; then \
-      npm_config_arch=arm npm_config_target_arch=arm yarn install; \
+      npm_config_target_arch=arm yarn install; \
     fi && \
     yarn cache clean --all && \
     clean-modules --yes
