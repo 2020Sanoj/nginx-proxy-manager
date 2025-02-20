@@ -21,7 +21,7 @@ COPY backend                         /app
 COPY global/certbot-dns-plugins.json /app/certbot-dns-plugins.json
 WORKDIR /app
 RUN apk upgrade --no-cache -a && \
-    apk add --no-cache ca-certificates nodejs yarn file && \
+    apk add --no-cache ca-certificates nodejs yarn build-base && \
     yarn global add clean-modules && \
     if [ "$TARGETARCH" = "amd64" ]; then \
      npm_config_target_arch=x64 yarn install; \
