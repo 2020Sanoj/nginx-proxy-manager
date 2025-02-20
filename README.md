@@ -253,7 +253,7 @@ location @goauthentik_proxy_signin {
     add_header Set-Cookie $auth_cookie;
     return 302 /outpost.goauthentik.io/start?rd=$request_uri;
     # For domain level, use the below error_page to redirect to your authentik server with the full redirect path
-    # return 302 https://authentik.company/outpost.goauthentik.io/start?rd=$scheme://$http_host$request_uri;
+    # return 302 https://authentik.company/outpost.goauthentik.io/start?rd=$scheme://$host$request_uri;
 }
 ```
 
