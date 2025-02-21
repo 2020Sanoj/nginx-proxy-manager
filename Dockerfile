@@ -20,7 +20,7 @@ COPY backend                         /app
 COPY global/certbot-dns-plugins.json /app/certbot-dns-plugins.json
 WORKDIR /app
 RUN apk upgrade --no-cache -a && \
-    apk add --no-cache ca-certificates nodejs yarn build-base python binutils file && \
+    apk add --no-cache ca-certificates nodejs yarn build-base python3 binutils file && \
     yarn global add clean-modules && \
     yarn install && \
     yarn cache clean --all && \
