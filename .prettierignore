@@ -1,4 +1,4 @@
-.prettierignore
+.github
 
 src/public/tailwind.css
 src/composer.lock
