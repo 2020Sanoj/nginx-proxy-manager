@@ -13,7 +13,7 @@ COPY darkmode.css /app/dist/css/darkmode.css
 COPY security.txt /app/dist/.well-known/security.txt
 
 
-FROM alpine:3.21.3 AS build-backend
+FROM alpine:3.21.3 AS backend
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 ARG NODE_ENV=production
 COPY backend                         /app
