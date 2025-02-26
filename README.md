@@ -285,9 +285,7 @@ proxy_set_header Content-Length "";
 ```
 
 ### prerun scripts (EXPERT option) - if you don't know what this is, ignore it
-run order: entrypoint.sh (prerun scripts) => start.sh => launch.sh <br>
-if you need to run scripts before NPMplus launches put them under: `/opt/npmplus/prerun/*.sh` (please add `#!/usr/bin/env sh` / `#!/usr/bin/env bash` to the top of the script) <br>
-you need to create this folder yourself - **NOTE:** I won't help you creating those patches/scripts if you need them you also need to know how to create them
+if you need to run scripts before NPMplus launches put them under: `/opt/npmplus/prerun/*.sh` (please add `#!/usr/bin/env sh` / `#!/usr/bin/env bash` to the top of the script) you need to create this folder yourself, also enable the env
 
 ## Contributing
 All are welcome to create pull requests for this project, but this does not mean it will be merged.
