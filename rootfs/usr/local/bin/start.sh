@@ -44,8 +44,8 @@ if [ -n "$NC_AIO" ] && ! echo "$NC_AIO" | grep -q "^true$\|^false$"; then
     sleep inf
 fi
 if [ "$NC_AIO" = "true" ]; then
-    if [ -z "$NC_DOMAIN" ]; then
-        echo "NC_DOMAIN is required in AIO mode."
+    if [ -z "$NC_DOMAIN" ] || ! echo "$NC_DOMAIN" | grep -q "\."; then
+        echo "NC_DOMAIN is unset (but required in AIO mode) or invalid, it needs to contain a dot."
         sleep inf
     fi
     export DISABLE_HTTP="${DISABLE_HTTP:-true}"
@@ -144,12 +144,12 @@ if [ -z "$TZ" ] || ! echo "$TZ" | grep -q "^[A-Za-z0-9_+-]\+/[A-Za-z0-9_+-]\+$";
 fi
 
 
-if ! echo "$ACME_SERVER" | grep -q "^https\?://.\+$"; then
+if ! echo "$ACME_SERVER" | grep -q "^https\?://"; then
     echo "ACME_SERVER needs to start with http:// or https://"
     sleep inf
 fi
 
-if [ -n "$ACME_EMAIL" ] && ! echo "$ACME_EMAIL" | grep -q "^.*@.*$"; then
+if [ -n "$ACME_EMAIL" ] && ! echo "$ACME_EMAIL" | grep -q "@"; then
     echo "ACME_EMAIL needs to contains @."
     sleep inf
 fi
@@ -956,6 +956,8 @@ if [ "$NGINX_LOAD_OPENTELEMETRY_MODULE" = "true" ]; then
 fi
 if [ "$NGINX_LOAD_FANCYINDEX_MODULE" = "true" ]; then
     sed -i "s|#\(load_module.\+ngx_http_fancyindex_module.so;\)|\1|g" /usr/local/nginx/conf/nginx.conf
+    sed -i "s|#fancyindex|fancyindex|g" /usr/local/nginx/conf/nginx.conf
+    sed -i "s|#fancyindex|fancyindex|g" /usr/local/nginx/conf/conf.d/include/always.conf
 fi
 if [ "$NGINX_LOAD_GEOIP2_MODULE" = "true" ]; then
     sed -i "s|#\(load_module.\+geoip2_module.so;\)|\1|g" /usr/local/nginx/conf/nginx.conf
